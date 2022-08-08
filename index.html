@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Web Components</title>
     <style>
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 2rem;
         font-family: sans-serif;
@@ -18,9 +19,29 @@
   </head>
   <body>
     <uc-modal>
-      <p>With your confirmation, you agree to pay the full amount</p>
+      <h1 slot="title">Please Confirm</h1>
+      <p>With your confirmation you agree to pay the full amount!</p>
     </uc-modal>
-    <p>Please confirm your choice:</p>
+    <p>Please confirm your choice.</p>
     <button>Show Details & Confirm</button>
+    <script>
+      const confirmButton = document.querySelector("button");
+      const modal = document.querySelector("uc-modal");
+
+      modal.addEventListener("confirm", () => {
+        console.log("confirmed");
+      });
+      modal.addEventListener("cancel", () => {
+        console.log("cancelled");
+      });
+
+      confirmButton.addEventListener("click", () => {
+        //  modal.setAttribute('opened', '');
+        if (!modal.isOpen) {
+          modal.open();
+          console.log("Opening...");
+        }
+      });
+    </script>
   </body>
 </html>
